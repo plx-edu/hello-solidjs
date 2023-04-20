@@ -9,45 +9,29 @@ const bttnClass = 'flex justify-center items-center h-5 w-5 border border-slate-
 const App: Component = () => {
   const [columns, setColumns] = createSignal(5);
   const [rows, setRows] = createSignal(5);
-
-  const PlusSign = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-  );
-
-  const MinusSign = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-    </svg>
-  );
+  const setNumberOfColumns = (nb: Number) => {
+    setColumns(Number(nb >= 1 ? nb : 1))
+  }
+  const setNumberOfRows = (nb: Number) => {
+    setRows(Number(nb >= 1 ? nb : 1))
+  }
 
   return (
     <div class='h-screen w-screen bg-slate-800'>
       <nav class='flex flex-row justify-center items-center h-10 fixed top-0 left-0 right-0 z-50 bg-rose-400'>
-        <p>Columns: {columns()} </p>
-        <button class={bttnClass}
-          onClick={() => setColumns(columns() > 1 ? columns() - 1 : 1)}
-        >
-          -
-        </button>
-        <button class={bttnClass}
-          onClick={() => setColumns(columns() + 1)}
-        >
-          {PlusSign()}
-        </button>
+        <div class="flex w-full gap-2 justify-center">
+          <label>Columns</label>
+          <input class="w-14 pl-1 bg-[rgba(0,0,0,0.125)] selection:bg-rose-200 rounded-sm outline-none" type='number' min={1} max={20} value={columns()}
+            onChange={e => setNumberOfColumns(Number(e.currentTarget.value))}
+          />
+        </div>
         
-        <p>Rows: {rows()} </p>
-        <button class={bttnClass}
-          onClick={() => setRows(rows() > 1 ? rows() - 1 : 1)}
-        >
-          -
-        </button>
-        <button class={bttnClass}
-          onClick={() => setRows(rows() + 1)}
-        >
-          +
-        </button>
+        <div class="flex w-full gap-2 justify-center">
+          <label>Rows</label>
+          <input class="w-14 pl-1 bg-[rgba(0,0,0,0.125)] selection:bg-rose-200 appearance-none rounded-sm outline-none" type='number' min={1} max={20} value={rows()}
+            onChange={e => setNumberOfRows(Number(e.currentTarget.value))}
+          />
+        </div>
       </nav>
 
       <div class='mt-10'>

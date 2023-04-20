@@ -9,6 +9,8 @@ export default function Square() {
     }
   };
 
+  console.log('new square');
+
   return (
     <div class="sqr-outer relative w-full before:content-[''] before:block before:pt-[100%]">
       <div class="sqr-inner absolute top-0 bottom-0 left-0 right-0">
